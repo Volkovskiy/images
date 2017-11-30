@@ -3,6 +3,7 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 
 module.exports = {
@@ -49,12 +50,11 @@ module.exports = {
 				test: /\.scss/,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
-					use: [{
-						loader: 'css-loader',
-						options: { minimize: true },
-					}, {
-						loader: 'sass-loader',
-					}],
+					use: [
+						'css-loader',
+						'postcss-loader',
+						'sass-loader',
+					],
 				}),
 			},
 		],
