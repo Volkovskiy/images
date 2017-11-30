@@ -1,13 +1,5 @@
+import images from '../config';
+
 require('../styles/styles.scss');
 
-const a = 4;
-
-function test(value) {
-	return value;
-}
-
-test(a);
-
-test('a');
-
-console.log('tt');
+console.log(images);
