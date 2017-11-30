@@ -1,3 +1,5 @@
+require('../styles/styles.scss');
+
 const a = 4;
 
 function test(value) {
