@@ -1,5 +1,10 @@
-import images from '../config';
+import { imagesConfig } from '../config';
+import ImagesList from './ImagesList';
 
 require('../styles/styles.scss');
 
-console.log(images);
+const imagesList = new ImagesList(imagesConfig);
+
+imagesList.render();
+
+document.body.innerHTML = imagesList.render();
