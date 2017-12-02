@@ -3,7 +3,6 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 
 
 module.exports = {
@@ -30,9 +29,10 @@ module.exports = {
 	},
 
 	resolve: {
-		extensions: ['.js'],
+		extensions: ['.js', '.scss'],
 		alias: {
 			$js: path.resolve(__dirname, 'src/js'),
+			$styles: path.resolve(__dirname, 'src/styles'),
 		},
 	},
 

@@ -1,10 +1,10 @@
+import ImagesList from './Components/ImagesList';
 import { imagesConfig } from '../config';
-import ImagesList from './ImagesList';
 
-require('../styles/styles.scss');
+require('$styles/styles');
 
 const imagesList = new ImagesList(imagesConfig);
 
-imagesList.render();
+const root = document.getElementById('app');
 
-document.body.innerHTML = imagesList.render();
+root.append(imagesList.html);

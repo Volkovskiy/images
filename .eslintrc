@@ -4,6 +4,9 @@
 		"indent": ["error", "tab"],
 		"no-tabs": "off",
 		"max-len": ["error", 120]
+	},
+	"globals": {
+		"document": true
 	}
 }
 
