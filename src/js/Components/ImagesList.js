@@ -27,7 +27,7 @@ class ImagesList {
 		return this.config.map(({ id, src }) => new Image({
 			id,
 			src,
-			classList: ['images__image', hiddenItems[id] ? 'hidden' : 'visible'],
+			classList: ['images__wrapper', hiddenItems[id] ? 'hidden' : 'visible'],
 			hideCallback: ImagesList.hideImage,
 		}));
 	}

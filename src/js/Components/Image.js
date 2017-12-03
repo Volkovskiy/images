@@ -35,11 +35,12 @@ class Image {
 
 	render() {
 		const div = document.createElement('div');
-		const img = document.createElement('img');
-
 		div.classList.add(...this.classList, 'image');
+
+		const img = document.createElement('img');
 		img.setAttribute('src', this.src);
 		setListener(img, 'click', this.openModal.bind(this));
+
 		div.appendChild(img);
 		div.appendChild(this.renderHideButton());
 
