@@ -1,5 +1,7 @@
-import { setListener } from '../tools';
 import Button from './Button';
+import Modal from './Modal';
+
+import { setListener } from '../tools';
 
 require('$styles/image');
 
@@ -7,7 +9,7 @@ class Image {
 	constructor(options) {
 		this.id = options.id;
 		this.src = options.src;
-		this.hideCallback = options.hideCallback;
+		this.hideCallback = options.hideCallback || Image.defaultHideCallback;
 		this.classList = options.classList;
 		this.html = this.render();
 	}
@@ -23,7 +25,7 @@ class Image {
 		this.html.classList.add('visible');
 	}
 
-	addHideButton() {
+	renderHideButton() {
 		return new Button({
 			callBack: this.hide.bind(this),
 			classList: ['test', 'secondClass'],
@@ -39,14 +41,16 @@ class Image {
 		img.setAttribute('src', this.src);
 		setListener(img, 'click', this.openModal.bind(this));
 		div.appendChild(img);
-		div.appendChild(this.addHideButton());
+		div.appendChild(this.renderHideButton());
 
 		return div;
 	}
 
 	openModal() {
-		console.log('open modal', this);
+		new Modal({	imageSrc: this.src }).openModal();
 	}
+
+	static defaultHideCallback() {}
 }
 
 module.exports = Image;

@@ -37,12 +37,12 @@ class ImagesList {
 		div.classList.add('images');
 
 		this.images.forEach(({ html }) => div.appendChild(html));
-		div.appendChild(this.addRestoreButton());
+		div.appendChild(this.renderRestoreButton());
 
 		return div;
 	}
 
-	addRestoreButton() {
+	renderRestoreButton() {
 		return new Button({
 			callBack: this.restoreImages.bind(this),
 			classList: ['test', 'secondClass'],

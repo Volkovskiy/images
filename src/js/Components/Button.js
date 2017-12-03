@@ -2,9 +2,9 @@ import { setListener } from '../tools';
 
 class Button {
 	constructor(params) {
-		this.text = params.text;
-		this.classList = params.classList;
-		this.callBack = params.callBack;
+		this.text = params.text || '';
+		this.classList = params.classList || [];
+		this.callBack = params.callBack || Button.defaultCallback;
 		this.html = this.prepareRender();
 	}
 
@@ -16,6 +16,8 @@ class Button {
 
 		return button;
 	}
+
+	static defaultCallback() {}
 }
 
 module.exports = Button;
