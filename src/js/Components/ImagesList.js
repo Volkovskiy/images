@@ -3,13 +3,21 @@ import Button from './Button';
 
 class ImagesList {
 	constructor(images) {
+		ImagesList.initialize();
 		this.images = images;
 		this.html = this.prepareRender();
-		ImagesList.removedImages = JSON.parse(localStorage.getItem('removedImages')) || {};
 	}
 
-	static get removedItems() {
-		return JSON.parse(localStorage.getItem('removedImages')) || {};
+	static initialize() {
+		ImagesList._removedImages = JSON.parse(localStorage.getItem('removedImages')) || {};
+	}
+
+	static get removedImages() {
+		return this._removedImages;
+	}
+
+	static set removedImages(id) {
+		this._removedImages[id] = true;
 	}
 
 	prepareRender() {
@@ -20,8 +28,8 @@ class ImagesList {
 			const image = new Image({
 				id,
 				src,
-				classList: ['images__image', ImagesList.removedItems[id] ? 'hidden' : 'visible'],
-				hideCallback: this.removeImage,
+				classList: ['images__image', ImagesList.removedImages[id] ? 'hidden' : 'visible'],
+				hideCallback: ImagesList.removeImage,
 			}).html;
 			div.appendChild(image);
 		});
@@ -39,13 +47,14 @@ class ImagesList {
 		}).html;
 	}
 
-	removeImage({ id }) {
-		ImagesList.removedImages[id] = true;
+	static removeImage({ id }) {
+		ImagesList.removedImages = id;
 		localStorage.setItem('removedImages', JSON.stringify(ImagesList.removedImages));
 	}
 
 	restoreImages() {
-		localStorage.setItem('removedImages', '');
+		debugger;
+		localStorage.removeItem('removedImages');
 		// this.images.forEach(image => image.show());
 	}
 }
