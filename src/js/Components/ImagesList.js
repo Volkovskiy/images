@@ -3,7 +3,7 @@ import Button from './Button';
 
 class ImagesList {
 	constructor(images) {
-		ImagesList.initialize();
+		ImagesList.hiddenImages = JSON.parse(localStorage.getItem('hiddenImages')) || {};
 		this.config = images;
 		this.images = this.serializeImages();
 		this.restoreButton = new Button({
@@ -14,21 +14,9 @@ class ImagesList {
 		this.html = this.render();
 	}
 
-	static initialize() {
-		ImagesList._hiddenImages = JSON.parse(localStorage.getItem('hiddenImages')) || {};
-	}
-
 	static hideImage(id) {
-		ImagesList.hiddenImages = id;
+		ImagesList.hiddenImages[id] = true;
 		localStorage.setItem('hiddenImages', JSON.stringify(ImagesList.hiddenImages));
-	}
-
-	static get hiddenImages() {
-		return ImagesList._hiddenImages;
-	}
-
-	static set hiddenImages(id) {
-		this._hiddenImages[id] = true;
 	}
 
 	serializeImages() {
@@ -62,6 +50,7 @@ class ImagesList {
 				image.show();
 			}
 		});
+		ImagesList.hiddenImages = {};
 	}
 }
 
