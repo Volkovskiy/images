@@ -10,7 +10,12 @@ class Image {
 		this.id = options.id;
 		this.src = options.src;
 		this.hideCallback = options.hideCallback || Image.defaultHideCallback;
-		this.classList = options.classList;
+		this.classList = options.classList || [];
+		this.hideButton = new Button({
+			callBack: this.hide.bind(this),
+			classList: ['test', 'secondClass'],
+			text: 'Remove',
+		});
 		this.html = this.render();
 	}
 
@@ -25,14 +30,6 @@ class Image {
 		this.html.classList.add('visible');
 	}
 
-	renderHideButton() {
-		return new Button({
-			callBack: this.hide.bind(this),
-			classList: ['test', 'secondClass'],
-			text: 'Remove',
-		}).html;
-	}
-
 	render() {
 		const div = document.createElement('div');
 		div.classList.add(...this.classList, 'image');
@@ -42,7 +39,7 @@ class Image {
 		setListener(img, 'click', this.openModal.bind(this));
 
 		div.appendChild(img);
-		div.appendChild(this.renderHideButton());
+		div.appendChild(this.hideButton.html);
 
 		return div;
 	}

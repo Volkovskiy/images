@@ -24,7 +24,7 @@ class ImagesList {
 	}
 
 	static get hiddenImages() {
-		return this._hiddenImages;
+		return ImagesList._hiddenImages;
 	}
 
 	static set hiddenImages(id) {
@@ -53,8 +53,9 @@ class ImagesList {
 	}
 
 	restoreImages() {
-		localStorage.removeItem('hiddenImages');
 		const removedItems = ImagesList.hiddenImages;
+
+		localStorage.removeItem('hiddenImages');
 
 		this.images.forEach((image) => {
 			if (removedItems[image.id]) {
