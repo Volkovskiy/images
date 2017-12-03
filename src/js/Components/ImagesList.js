@@ -20,12 +20,10 @@ class ImagesList {
 	}
 
 	serializeImages() {
-		const hiddenItems = ImagesList.hiddenImages;
-
 		return this.config.map(({ id, src }) => new Image({
 			id,
 			src,
-			classList: ['images__wrapper', hiddenItems[id] ? 'hidden' : 'visible'],
+			classList: ['images__wrapper', ImagesList.hiddenImages[id] ? 'hidden' : 'visible'],
 			hideCallback: ImagesList.hideImage,
 		}));
 	}
@@ -41,15 +39,13 @@ class ImagesList {
 	}
 
 	restoreImages() {
-		const removedItems = ImagesList.hiddenImages;
-
-		localStorage.removeItem('hiddenImages');
-
 		this.images.forEach((image) => {
-			if (removedItems[image.id]) {
+			if (ImagesList.hiddenImages[image.id]) {
 				image.show();
 			}
 		});
+
+		localStorage.removeItem('hiddenImages');
 		ImagesList.hiddenImages = {};
 	}
 }
