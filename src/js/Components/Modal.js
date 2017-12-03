@@ -7,6 +7,11 @@ require('$styles/modal');
 class Modal {
 	constructor(options) {
 		this.imageSrc = options.imageSrc || '';
+		this.button = new Button({
+			callBack: this.hideModal.bind(this),
+			classList: ['modal__close'],
+			text: 'Close',
+		});
 		this.html = this.render();
 	}
 
@@ -30,19 +35,11 @@ class Modal {
 		image.setAttribute('src', this.imageSrc);
 
 		wrapper.appendChild(image);
-		wrapper.appendChild(this.renderCloseButton());
+		wrapper.appendChild(this.button.html);
 
 		background.appendChild(wrapper);
 
 		return background;
-	}
-
-	renderCloseButton() {
-		return new Button({
-			callBack: this.hideModal.bind(this),
-			classList: ['modal__close'],
-			text: 'Close',
-		}).html;
 	}
 }
 

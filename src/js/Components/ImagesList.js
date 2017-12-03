@@ -6,11 +6,21 @@ class ImagesList {
 		ImagesList.initialize();
 		this.config = images;
 		this.images = this.serializeImages();
+		this.restoreButton = new Button({
+			callBack: this.restoreImages.bind(this),
+			classList: ['test', 'secondClass'],
+			text: 'Restore images',
+		});
 		this.html = this.render();
 	}
 
 	static initialize() {
 		ImagesList._hiddenImages = JSON.parse(localStorage.getItem('hiddenImages')) || {};
+	}
+
+	static hideImage(id) {
+		ImagesList.hiddenImages = id;
+		localStorage.setItem('hiddenImages', JSON.stringify(ImagesList.hiddenImages));
 	}
 
 	static get hiddenImages() {
@@ -37,22 +47,9 @@ class ImagesList {
 		div.classList.add('images');
 
 		this.images.forEach(({ html }) => div.appendChild(html));
-		div.appendChild(this.renderRestoreButton());
+		div.appendChild(this.restoreButton.html);
 
 		return div;
-	}
-
-	renderRestoreButton() {
-		return new Button({
-			callBack: this.restoreImages.bind(this),
-			classList: ['test', 'secondClass'],
-			text: 'Restore images',
-		}).html;
-	}
-
-	static hideImage(id) {
-		ImagesList.hiddenImages = id;
-		localStorage.setItem('hiddenImages', JSON.stringify(ImagesList.hiddenImages));
 	}
 
 	restoreImages() {
