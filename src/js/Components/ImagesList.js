@@ -4,36 +4,39 @@ import Button from './Button';
 class ImagesList {
 	constructor(images) {
 		ImagesList.initialize();
-		this.images = images;
-		this.html = this.prepareRender();
+		this.config = images;
+		this.images = this.serializeImages();
+		this.html = this.render();
 	}
 
 	static initialize() {
-		ImagesList._removedImages = JSON.parse(localStorage.getItem('removedImages')) || {};
+		ImagesList._hiddenImages = JSON.parse(localStorage.getItem('hiddenImages')) || {};
 	}
 
-	static get removedImages() {
-		return this._removedImages;
+	static get hiddenImages() {
+		return this._hiddenImages;
 	}
 
-	static set removedImages(id) {
-		this._removedImages[id] = true;
+	static set hiddenImages(id) {
+		this._hiddenImages[id] = true;
 	}
 
-	prepareRender() {
+	serializeImages() {
+		const hiddenItems = ImagesList.hiddenImages;
+
+		return this.config.map(({ id, src }) => new Image({
+			id,
+			src,
+			classList: ['images__image', hiddenItems[id] ? 'hidden' : 'visible'],
+			hideCallback: ImagesList.hideImage,
+		}));
+	}
+
+	render() {
 		const div = document.createElement('div');
 		div.classList.add('images');
 
-		this.images.forEach(({ id, src }) => {
-			const image = new Image({
-				id,
-				src,
-				classList: ['images__image', ImagesList.removedImages[id] ? 'hidden' : 'visible'],
-				hideCallback: ImagesList.removeImage,
-			}).html;
-			div.appendChild(image);
-		});
-
+		this.images.forEach(({ html }) => div.appendChild(html));
 		div.appendChild(this.addRestoreButton());
 
 		return div;
@@ -47,15 +50,20 @@ class ImagesList {
 		}).html;
 	}
 
-	static removeImage({ id }) {
-		ImagesList.removedImages = id;
-		localStorage.setItem('removedImages', JSON.stringify(ImagesList.removedImages));
+	static hideImage(id) {
+		ImagesList.hiddenImages = id;
+		localStorage.setItem('hiddenImages', JSON.stringify(ImagesList.hiddenImages));
 	}
 
 	restoreImages() {
-		debugger;
-		localStorage.removeItem('removedImages');
-		// this.images.forEach(image => image.show());
+		localStorage.removeItem('hiddenImages');
+		const removedItems = ImagesList.hiddenImages;
+
+		this.images.forEach((image) => {
+			if (removedItems[image.id]) {
+				image.show();
+			}
+		});
 	}
 }
 

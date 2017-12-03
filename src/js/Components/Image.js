@@ -9,17 +9,18 @@ class Image {
 		this.src = options.src;
 		this.hideCallback = options.hideCallback;
 		this.classList = options.classList;
-		this.html = this.prepareRender();
+		this.html = this.render();
 	}
 
 	hide() {
-		this.hideCallback(this);
+		this.hideCallback(this.id);
 		this.html.classList.remove('visible');
 		this.html.classList.add('hidden');
 	}
 
 	show() {
-
+		this.html.classList.remove('hidden');
+		this.html.classList.add('visible');
 	}
 
 	addHideButton() {
@@ -30,7 +31,7 @@ class Image {
 		}).html;
 	}
 
-	prepareRender() {
+	render() {
 		const div = document.createElement('div');
 		const img = document.createElement('img');
 

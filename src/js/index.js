@@ -7,4 +7,4 @@ const imagesList = new ImagesList(imagesConfig);
 
 const root = document.getElementById('app');
 
-root.append(imagesList.html);
+root.appendChild(imagesList.html);
