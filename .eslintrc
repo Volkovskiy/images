@@ -6,7 +6,8 @@
 		"max-len": ["error", 120]
 	},
 	"globals": {
-		"document": true
+		"document": true,
+		"localStorage": true
 	}
 }
 

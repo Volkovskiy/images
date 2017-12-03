@@ -4,17 +4,25 @@ import Button from './Button';
 require('$styles/image');
 
 class Image {
-	constructor(src) {
-		this.src = src;
-		this.show = false;
+	constructor(options) {
+		this.id = options.id;
+		this.src = options.src;
+		this.hideCallback = options.hideCallback;
+		this.classList = options.classList;
 		this.html = this.prepareRender();
 	}
 
 	hide() {
-		console.log('remove', this);
+		this.hideCallback(this);
+		this.html.classList.remove('visible');
+		this.html.classList.add('hidden');
 	}
 
-	createButton() {
+	show() {
+
+	}
+
+	addHideButton() {
 		return new Button({
 			callBack: this.hide.bind(this),
 			classList: ['test', 'secondClass'],
@@ -26,11 +34,11 @@ class Image {
 		const div = document.createElement('div');
 		const img = document.createElement('img');
 
-		div.classList.add('image');
+		div.classList.add(...this.classList, 'image');
 		img.setAttribute('src', this.src);
 		setListener(img, 'click', this.openModal.bind(this));
 		div.appendChild(img);
-		div.appendChild(this.createButton());
+		div.appendChild(this.addHideButton());
 
 		return div;
 	}
@@ -38,7 +46,6 @@ class Image {
 	openModal() {
 		console.log('open modal', this);
 	}
-	// todo: add setter 'show/hide'
 }
 
 module.exports = Image;
