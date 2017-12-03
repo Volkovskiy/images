@@ -12,7 +12,7 @@ class Image {
 		this.hideCallback = options.hideCallback || Image.defaultHideCallback;
 		this.classList = options.classList || [];
 		this.hideButton = new Button({
-			callBack: this.hide.bind(this),
+			action: this.hide.bind(this),
 			classList: ['test', 'secondClass'],
 			text: 'Remove',
 		});

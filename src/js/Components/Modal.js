@@ -8,7 +8,7 @@ class Modal {
 	constructor(options) {
 		this.imageSrc = options.imageSrc || '';
 		this.button = new Button({
-			callBack: this.hideModal.bind(this),
+			action: this.hideModal.bind(this),
 			classList: ['modal__close'],
 			text: 'Close',
 		});
