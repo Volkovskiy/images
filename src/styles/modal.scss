@@ -7,3 +7,23 @@
 	background-color: rgba(0, 0, 0, .5);
 	z-index: 100;
 }
+
+.modal__wrapper {
+	position: absolute;
+	top: 10%;
+	left: 10%;
+	bottom: 10%;
+	right: 10%;
+	margin: auto;
+}
+
+.modal__image {
+	max-width: 100%;
+
+}
+
+.modal__close {
+	position: absolute;
+	right: -50px;
+	top: 0;
+}

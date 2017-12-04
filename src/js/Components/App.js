@@ -1,3 +1,4 @@
+require('$styles/styles');
 
 class App {
 	constructor(components) {

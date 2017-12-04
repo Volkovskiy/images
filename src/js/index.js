@@ -5,7 +5,6 @@ import Clock from './Components/Clock';
 
 import { imagesConfig } from '../config';
 
-require('$styles/styles');
 
 const app = new App({
 	imagesList: new ImagesList({

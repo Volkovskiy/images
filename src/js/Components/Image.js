@@ -13,8 +13,8 @@ class Image {
 		this.classList = options.classList || [];
 		this.hideButton = new Button({
 			action: this.hide.bind(this),
-			classList: ['test', 'secondClass'],
-			text: 'Remove',
+			classList: ['button', 'button__hide'],
+			text: 'X',
 		});
 		this.html = this.render();
 	}
@@ -34,12 +34,17 @@ class Image {
 		const div = document.createElement('div');
 		div.classList.add(...this.classList, 'image');
 
-		const img = document.createElement('img');
-		img.setAttribute('src', this.src);
+		const img = document.createElement('div');
+		img.classList.add('image_rounded');
+		img.setAttribute('style', `background-image: url(${this.src});`);
 		setListener(img, 'click', this.openModal.bind(this));
 
+		const buttonWrapper = document.createElement('div');
+		buttonWrapper.classList.add('button-wraper');
+		buttonWrapper.appendChild(this.hideButton.html);
+
 		div.appendChild(img);
-		div.appendChild(this.hideButton.html);
+		div.appendChild(buttonWrapper);
 
 		return div;
 	}

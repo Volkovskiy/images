@@ -1,3 +1,5 @@
+require('$styles/counter');
+
 class Clock {
 	constructor(locale = 'ru') {
 		this.locale = locale;
@@ -10,7 +12,7 @@ class Clock {
 		span.textContent = this.getDate();
 
 		setInterval(() => {
-			span.textContent = this.getDate();
+			span.textContent = `Date: ${this.getDate()}`;
 		}, 1000);
 
 		return span;
