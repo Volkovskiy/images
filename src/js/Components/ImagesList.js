@@ -1,11 +1,13 @@
+import App from './App';
 import Image from './Image';
 import Button from './Button';
 
 class ImagesList {
-	constructor(images) {
+	constructor(props) {
 		this.hiddenImages = JSON.parse(localStorage.getItem('hiddenImages')) || {};
-		this.config = images;
+		this.config = props.images;
 		this.images = this.serializeImages();
+		App.counter = this.countVisible();
 		this.restoreButton = new Button({
 			action: this.restoreImages.bind(this),
 			classList: ['test', 'secondClass'],
@@ -17,6 +19,11 @@ class ImagesList {
 	hideImage(id) {
 		this.hiddenImages[id] = true;
 		localStorage.setItem('hiddenImages', JSON.stringify(this.hiddenImages));
+		App.counter = this.countVisible();
+	}
+
+	countVisible() {
+		return this.images.length - Object.keys(this.hiddenImages).length;
 	}
 
 	serializeImages() {
@@ -47,6 +54,7 @@ class ImagesList {
 
 		localStorage.removeItem('hiddenImages');
 		this.hiddenImages = {};
+		App.counter = this.countVisible();
 	}
 }
 

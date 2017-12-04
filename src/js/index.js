@@ -1,10 +1,17 @@
+import App from './Components/App';
 import ImagesList from './Components/ImagesList';
+import ImagesCounter from './Components/ImagesCounter';
 import { imagesConfig } from '../config';
 
 require('$styles/styles');
 
-const imagesList = new ImagesList(imagesConfig);
 
-const root = document.getElementById('app');
+const app = new App({
+	imagesList: new ImagesList({
+		images: imagesConfig,
+	}),
+	imagesCounter: new ImagesCounter(App.counter),
+});
 
-root.appendChild(imagesList.html);
+app.render();
+
