@@ -3,18 +3,16 @@ class App {
 	constructor(components) {
 		this.imagesCounter = components.imagesCounter;
 		this.imagesList = components.imagesList;
+		this.clock = components.clock;
 		App._counter = 0;
-		App.renderCounter = this.imagesCounter;
 	}
 
 	render() {
 		const root = document.getElementById('app');
 
-		const span = document.createElement('span');
-		span.textContent = App.counter;
-
-		root.appendChild(this.imagesCounter.render());
-		root.appendChild(this.imagesList.html);
+		root.appendChild(this.imagesCounter.html);
+		root.appendChild(this.clock.render());
+		root.appendChild(this.imagesList.render());
 	}
 
 	static get counter() {
@@ -23,9 +21,9 @@ class App {
 
 	static set counter(value) {
 		App._counter = value;
-
-		if (App.renderCounter) {
-			App.renderCounter.render();
+		const counter = document.querySelector('.counter');
+		if (counter) {
+			counter.textContent = App._counter;
 		}
 	}
 }

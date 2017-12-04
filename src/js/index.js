@@ -1,15 +1,17 @@
 import App from './Components/App';
 import ImagesList from './Components/ImagesList';
 import ImagesCounter from './Components/ImagesCounter';
+import Clock from './Components/Clock';
+
 import { imagesConfig } from '../config';
 
 require('$styles/styles');
-
 
 const app = new App({
 	imagesList: new ImagesList({
 		images: imagesConfig,
 	}),
+	clock: new Clock(),
 	imagesCounter: new ImagesCounter(App.counter),
 });
 
