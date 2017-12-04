@@ -1,5 +1,6 @@
 $red: #e74c3c;
 $gray: #777;
+$yellow: #fc0;
 
 .images {
 	margin-top: 50px;
@@ -33,7 +34,7 @@ $gray: #777;
 	transition: transform .3s ease-in, border .2s;
 
 	&:hover {
-		border: 5px solid $red;
+		border: 5px solid $yellow !important;
 		transform: rotate(45deg);
 		transition: transform .2s ease-out, border .2s;
 	}
